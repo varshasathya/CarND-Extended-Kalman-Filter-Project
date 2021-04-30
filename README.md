@@ -132,6 +132,10 @@ still be compilable with cmake and make.
 
 The Code compiles without errors with cmake and make.
 
+### Output
+[Extended_KF_Dataset1.mp4](https://github.com/varshasathya/CarND-Extended-Kalman-Filter-Project/blob/main/Output/Extended_KF_Dataset1.mp4)
+[Extended_KF_Dataset2.mp4](https://github.com/varshasathya/CarND-Extended-Kalman-Filter-Project/blob/main/Output/Extended_KF_Dataset2.mp4)
+
 #### Accuracy
 px, py, vx, vy output coordinates must have an RMSE <= [.11, .11, 0.52, 0.52] when using the file: "obj_pose-laser-radar-synthetic-input.txt" which is the same data file the simulator uses for Dataset 1.
 
