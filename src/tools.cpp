@@ -65,6 +65,12 @@ MatrixXd Tools::CalculateJacobian(const VectorXd& x_state) {
     float denominator = (px * px) + (py * py);
     float sqrt_denominator = sqrt(denominator);
     float denominator_three_by_two = denominator * sqrt_denominator;
+    
+    //check division by zero
+    if (denominator == 0){
+      cout << "Division by Zero" << endl;
+      return Hj;
+  }
     float der_x = px / sqrt_denominator;
     float der_y = py / sqrt_denominator;
     float der_rho_x = (px * ((vy*px) - (vx*py)))/(denominator_three_by_two);

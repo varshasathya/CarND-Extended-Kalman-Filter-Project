@@ -40,6 +40,11 @@ OUTPUT: values provided by the c++ program to the simulator
 
 ---
 
+[//]: # (Image References)
+
+[image1]: ./Readme_images/Extended_KF_Dataset1.PNG "Extended_KF_Dataset1_Result"
+[image2]: ./Readme_images/Extended_KF_Dataset2.PNG "Extended_KF_Dataset1_Result"
+
 ## Other Important Dependencies
 
 * cmake >= 3.5
@@ -88,8 +93,7 @@ Note: regardless of the changes you make, your project must be buildable using
 cmake and make!
 
 More information is only accessible by people who are already enrolled in Term 2
-of CarND. If you are enrolled, see [the project resources page](https://classroom.udacity.com/nanodegrees/nd013/parts/40f38239-66b6-46ec-ae68-03afd8a601c8/modules/0949fca6-b379-42af-a919-ee50aa304e6a/lessons/f758c44c-5e40-4e01-93b5-1a82aa4e044f/concepts/382ebfd6-1d55-4487-84a5-b6a5a4ba1e47)
-for instructions and the project rubric.
+of CarND. 
 
 ## Hints and Tips!
 
@@ -124,6 +128,42 @@ and how to install it.
 Regardless of the IDE used, every submitted project must
 still be compilable with cmake and make.
 
-## How to write a README
-A well written README file can enhance your project and portfolio.  Develop your abilities to create professional README files by completing [this free course](https://www.udacity.com/course/writing-readmes--ud777).
+## Ruberic Points
 
+The Code compiles without errors with cmake and make.
+
+#### Accuracy
+px, py, vx, vy output coordinates must have an RMSE <= [.11, .11, 0.52, 0.52] when using the file: "obj_pose-laser-radar-synthetic-input.txt" which is the same data file the simulator uses for Dataset 1.
+
+Results Dataset 1 - [0.0964, 0.0853, 0.4154, 0.4316]
+
+![alt text][image1]
+
+Results Dataset 2 - [0.0726, 0.0965, 0.4216, 0.4932]
+
+![alt text][image2]
+
+#### Your Kalman Filter algorithm handles the first measurements appropriately.
+
+The first measurements are handled in [src/FusionEKF.cpp](https://github.com/varshasathya/CarND-Extended-Kalman-Filter-Project/blob/main/src/FusionEKF.cpp)
+
+#### Your Kalman Filter algorithm first predicts then updates.
+
+The Predict is done first and then Update which can be found in [src/FusionEKF.cpp](https://github.com/varshasathya/CarND-Extended-Kalman-Filter-Project/blob/main/src/FusionEKF.cpp) from line 146.
+
+#### Your Kalman Filter can handle radar and lidar measurements.
+
+The kalman filter algorithms which can be found [src/kalman_filter.cpp](https://github.com/varshasathya/CarND-Extended-Kalman-Filter-Project/blob/main/src/kalman_filter.cpp) handles both radar and lidar measurements and the same applies in [src/FusionEKF.cpp](https://github.com/varshasathya/CarND-Extended-Kalman-Filter-Project/blob/main/src/FusionEKF.cpp).
+
+#### Code Efficiency
+
+Inefficiencies are handled. Also repeated caculations are avoided in most of the cases.
+
+E.g:
+```
+//precompute few terms to avoid repeatations of calculations.
+    float denominator = (px * px) + (py * py);
+    float sqrt_denominator = sqrt(denominator);
+    float denominator_three_by_two = denominator * sqrt_denominator;
+```
+which can be found in [src/tools.cpp](https://github.com/varshasathya/CarND-Extended-Kalman-Filter-Project/blob/main/src/tools.cpp).
